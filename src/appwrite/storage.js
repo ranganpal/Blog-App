@@ -128,11 +128,10 @@ export class StorageService {
 
   getFliePreview(fileId) {
     try {
-      this.storage.getFilePreview(
+      return this.storage.getFilePreview(
         conf.appwriteBucketId,
         fileId
       );
-      return true;
     }
     catch (error) {
       console.log("Appwrite service :: getFliePreview :: error", error);
