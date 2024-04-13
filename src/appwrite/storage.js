@@ -34,7 +34,7 @@ export class StorageService {
 
   async updatePost({ title, slug, content, featuredImage, status }) {
     try {
-      return await this.databases.createDocument(
+      return await this.databases.updateDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         slug,
@@ -53,7 +53,7 @@ export class StorageService {
 
   async deletePost(slug) {
     try {
-      await this.databases.createDocument(
+      await this.databases.deleteDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         slug
@@ -82,7 +82,7 @@ export class StorageService {
 
   async getPosts() {
     try {
-      return await this.databases.getDocument(
+      return await this.databases.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         [
