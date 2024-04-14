@@ -10,7 +10,7 @@ import Login from "./Login"
 import Signup from "./Signup"
 import RTEditor from "./RTEditor"
 import Protected from "./Protected"
-import PostFrom from "./PostFrom"
+import PostForm from "./PostForm"
 import PostCard from "./PostCard"
 
 export { 
@@ -26,6 +26,6 @@ export {
   Signup,
   RTEditor,
   Protected,
-  PostFrom,
+  PostForm,
   PostCard
 };

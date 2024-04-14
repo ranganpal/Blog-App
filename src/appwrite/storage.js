@@ -13,7 +13,7 @@ export class StorageService {
 
   // Post Services
 
-  async createPost({ title, slug, content, featuredImage, status }) {
+  async createPost({ title, slug, content, featuredImage, status, userId }) {
     try {
       return await this.databases.createDocument(
         conf.appwriteDatabaseId,
@@ -23,7 +23,8 @@ export class StorageService {
           title,
           content,
           featuredImage,
-          status
+          status,
+          userId
         }
       );
     }
@@ -80,14 +81,12 @@ export class StorageService {
     }
   }
 
-  async getPosts() {
+  async getPosts(queries = [Query.equal("status", "active")]) {
     try {
       return await this.databases.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
-        [
-          Query.equal("status", "active")
-        ]
+        queries
       );
     }
     catch (error) {
