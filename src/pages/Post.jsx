@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import parse from 'html-react-parser'
 import { useSelector } from 'react-redux'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Button, Container } from '../components'
 import storageService from '../appwrite/storage'
 
@@ -10,11 +10,11 @@ function Post() {
   const navigate = useNavigate()
   const [post, setPost] = useState(null)
   const userData = useSelector(status => status.auth.userData)
-  const isAuthor = post && userData ? post.userId === userData.$id : false
+  const isAuthor = post && userData ? post.authorId === userData.$id : false
 
   useEffect(() => {
     if (slug) {
-      appwriteService.getPost(slug).then((post) => {
+      storageService.getPost(slug).then((post) => {
         if (post) setPost(post);
         else navigate("/");
       });
@@ -25,10 +25,10 @@ function Post() {
   }, [slug, navigate])
 
   return post ? (
-    <div className="py-8">
+    <div className="py-8 min-h-screen">
       <Container>
 
-        <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
+        <div className="w-full flex justify-center mb-4 relative border rounded-xl p-4 bg-gray-400">
 
           <img
             src={storageService.getFliePreview(post.featuredImage)}
@@ -41,7 +41,7 @@ function Post() {
 
               <Button
                 bgColor="bg-green-500"
-                className="mr-3"  // may be not needed
+                className="mr-3 hover:bg-green-600"
                 children="Edit"
                 onClick={() => {
                   navigate(`/edit-post/${post.$id}`)
@@ -50,12 +50,13 @@ function Post() {
 
               <Button
                 bgColor="bg-red-500"
+                className="hover:bg-red-600"
                 children="Delete"
                 onClick={() => {
                   storageService.deletePost(post.$id).then((status) => {
                     if (status) {
-                      storageService.deleteFile(post.featuredImage);
-                      navigate("/");
+                      storageService.deleteFile(post.featuredImage)
+                      navigate("/")
                     }
                   });
                 }}

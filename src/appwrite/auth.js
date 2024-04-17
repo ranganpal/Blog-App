@@ -4,7 +4,7 @@ import { Client, Account, ID } from "appwrite";
 export class AuthService {
   constructor() {
     this.client = new Client()
-      .setEndpoint(conf.appwriteUrl) 
+      .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);
 
     this.account = new Account(this.client);
@@ -15,23 +15,46 @@ export class AuthService {
       const userAccount = await this.account.create(ID.unique(), email, password, name);
 
       if (userAccount) {
-        return this.login(email, password);
+        return this.login({ email, password });
       }
       else {
         return userAccount;
       }
     }
     catch (error) {
-      console.log("Appwrite service :: createAccount :: error", error);
+      console.log("Appwrite service :: createAccount :: error ::", error);
+    }
+  }
+  
+  async updateAccount({ email, oldPassword, newPassword, name }) {
+    try {
+      await this.account.updateEmail(email, oldPassword)
+      await this.account.updatePassword(newPassword, oldPassword)
+      return await this.account.updateName(name)
+    }
+    catch (error) {
+      console.log("Appwrite service :: updateAccount :: error ::", error);
+    }
+  }
+  
+  async deleteAccount(userId) {
+    try {
+      console.log(userId);
+      await this.account.deleteIdentity(userId)
+      return true
+    }
+    catch (error) {
+      console.log("Appwrite service :: deleteAccount :: error ::", error);
+      return false
     }
   }
 
-  async login(email, password) {
+  async login({ email, password }) {
     try {
       return await this.account.createEmailSession(email, password);
     }
     catch (error) {
-      console.log("Appwrite service :: login :: error", error);
+      console.log("Appwrite service :: login :: error ::", error);
     }
   }
 
@@ -40,7 +63,7 @@ export class AuthService {
       await this.account.deleteSessions();
     }
     catch (error) {
-      console.log("Appwrite service :: logout :: error", error);
+      console.log("Appwrite service :: logout :: error ::", error);
     }
   }
 
@@ -49,7 +72,7 @@ export class AuthService {
       return await this.account.get();
     }
     catch (error) {
-      console.log("Appwrite service :: getCurrentUser :: error", error);
+      console.log("Appwrite service :: getCurrentUser :: error ::", error);
     }
 
     return null;

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Controller } from 'react-hook-form'
 import { Editor } from '@tinymce/tinymce-react'
+import conf from "../conf/conf";
 
 function RTEditor({
   name,
@@ -20,9 +21,10 @@ function RTEditor({
         control={control}
         render={({ field: { onChange } }) => (
           <Editor
+            apiKey={conf.tinymceApiKey}
+            initialValue={defaultValue}
             init={{
-              initialValue: defaultValue,
-              height: 500,
+              height: 650,
               menubar: true,
               toolbar: "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
               content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",

@@ -1,20 +1,24 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { Container, PostCard } from '../components'
 import storageService from '../appwrite/storage'
 
-function AllPosts() {
+function MyPosts() {
   const [posts, setPosts] = useState([])
+  const userData = useSelector(state => state.auth.userData)
 
   useEffect(() => {
     storageService.getPosts().then((posts) => {
-      if (posts) {
-        setPosts(posts.documents)
+      if (posts && userData) {
+        setPosts(posts.documents.filter((post) => (
+          userData.$id == post.authorId
+        )))
       }
     })
   }, [])
 
   return (
-    <div className="w-full py-8">
+    <div className="w-full min-h-screen py-8">
       <Container>
         <div className="flex flex-wrap">
           {posts.map((post) => (
@@ -28,4 +32,4 @@ function AllPosts() {
   )
 }
 
-export default AllPosts
+export default MyPosts

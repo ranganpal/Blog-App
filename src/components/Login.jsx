@@ -19,6 +19,7 @@ function Login() {
     try {
       const session = await authService.login(data)
       if (session) {
+
         const userData = await authService.getCurrentUser()
         if (userData) dispatch(authLogin(userData))
         navigate("/")
@@ -31,9 +32,9 @@ function Login() {
 
   return (
     <div className="flex items-center justify-center w-full">
-      <div className="mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10">
+      <div className="mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-8 border border-black/10">
 
-        <div>
+        <div className="text-center">
           <span className="inline-block w-full max-w-[100px]">
             <Logo width="100%" />
           </span>
@@ -43,7 +44,7 @@ function Login() {
           Sign in to your account
         </h2>
 
-        <p className="mt-2 text-center text-base text-black/60">
+        <p className="mt-4 text-center text-base text-black/60">
           Don&apos;t have any account?&nbsp;
           <Link
             to="/signup"
@@ -53,15 +54,15 @@ function Login() {
           </Link>
         </p>
 
-        {error && <p className="text-red-600 mt-8 text-center">
+        {error && <p className="text-red-600 mt-6 text-center">
           {error}
         </p>}
 
         <form
-          className="mt-8"
+          className="mt-6"
           onSubmit={handleSubmit(login)}
         >
-          <div className='space-y-5'>
+          <div className='space-y-3'>
 
             <Input
               type="email"
@@ -91,13 +92,15 @@ function Login() {
               })}
             />
 
-            <Button
-              type="submit"
-              className="w-full"
-              children="Sign in"
-            />
+            <div className="pt-4">
+              <Button
+                type="submit"
+                className="w-full"
+                children="Sign in"
+              />
+            </div>
 
-          </div> 
+          </div>
         </form>
 
       </div>

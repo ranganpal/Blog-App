@@ -10,7 +10,9 @@ function Select({
 
   return (
     <div>
-      {label && <label htmlFor={id}></label>}
+      {label && <label htmlFor={id}>
+        {label}  
+      </label>}
       <select
         id={id}
         ref={ref}

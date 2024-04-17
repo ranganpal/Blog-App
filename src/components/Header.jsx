@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import { Container, Logo, LogoutBtn } from './index'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Logo, LogoutBtn } from './index'
 
 
 function Header() {
@@ -25,8 +25,8 @@ function Header() {
       active: !authStatus,
     },
     {
-      name: "All Posts",
-      url: "/all-posts",
+      name: "My Posts",
+      url: "/my-posts",
       active: authStatus,
     },
     {
@@ -34,43 +34,46 @@ function Header() {
       url: "/add-post",
       active: authStatus,
     },
+    {
+      name: "My Account",
+      url: "/account",
+      active: authStatus,
+    }
   ]
 
   return (
-    <header className="py-3 shadow bg-gray-500">
-      <Container>
-        <nav className="flex">
+    <header className="px-5 py-3 shadow bg-gray-500">
+      <nav className="flex">
 
-          <div className="mr-4">
-            <Link to="/">
-              <Logo width="70px" />
-            </Link>
-          </div>
+        <div className="mr-4">
+          <Link to="/">
+            <Logo width="50px" />
+          </Link>
+        </div>
 
-          <ul>
-            
-            {navItems.map((item) => (
-              item.active ? (
-                <li key={item.name}>
-                  <button
-                    className="inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full"
-                    onClick={() => navigate(item.url)}
+        <ul className="flex ml-auto text-lg">
+          {navItems.map((item) => (
+            item.active ? (
+              <li key={item.name}>
+                <button
+                  className="inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full"
+                >
+                  <NavLink
+                    to={item.url}
+                    className={({ isActive }) => (
+                      `${isActive ? "underline underline-offset-2 font-medium" : null}`
+                    )}
                   >
                     {item.name}
-                  </button>
-                </li>
-              ) : (null)
-            ))}
+                  </NavLink>
+                </button>
+              </li>
+            ) : (null)
+          ))}
+        </ul>
 
-            {authStatus && (
-              <LogoutBtn />
-            )}
-
-          </ul>
-
-        </nav>
-      </Container>
-    </header>
+      </nav>
+    </header >
   )
 }
 

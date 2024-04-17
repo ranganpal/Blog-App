@@ -1,12 +1,12 @@
 import React from 'react'
-import { Signup as SignupComp } from '../components'
+import { Signup } from '../components'
 
-function Signup() {
+function Account() {
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <SignupComp />
+      <Signup />
     </div>
   )
 }
 
-export default Signup
+export default Account

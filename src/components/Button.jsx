@@ -9,7 +9,7 @@ function Button({
 }) {
   return (
     <button
-      className={`px-4 py-2 rounded-lg ${bgColor} ${textColor} ${className}`}
+      className={`px-4 py-2 rounded-lg ${bgColor} ${textColor} ${className}  duration-200 hover:bg-blue-700`}
       {...props}
     >
       {children}

@@ -13,7 +13,14 @@ export class StorageService {
 
   // Post Services
 
-  async createPost({ title, slug, content, featuredImage, status, userId }) {
+  async createPost({
+    title,
+    slug,
+    content,
+    status,
+    authorId,
+    authorName,
+    featuredImage }) {
     try {
       return await this.databases.createDocument(
         conf.appwriteDatabaseId,
@@ -22,18 +29,26 @@ export class StorageService {
         {
           title,
           content,
-          featuredImage,
           status,
-          userId
+          authorId,
+          authorName,
+          featuredImage
         }
       );
     }
     catch (error) {
-      console.log("Appwrite service :: createPost :: error", error);
+      console.log("Appwrite service :: createPost :: error ::", error);
     }
   }
 
-  async updatePost({ title, slug, content, featuredImage, status }) {
+  async updatePost({
+    title,
+    slug,
+    content,
+    status,
+    authorId,
+    authorName,
+    featuredImage }) {
     try {
       return await this.databases.updateDocument(
         conf.appwriteDatabaseId,
@@ -42,13 +57,15 @@ export class StorageService {
         {
           title,
           content,
-          featuredImage,
-          status
+          status,
+          authorId,
+          authorName,
+          featuredImage
         }
       );
     }
     catch (error) {
-      console.log("Appwrite service :: updatePost :: error", error);
+      console.log("Appwrite service :: updatePost :: error ::", error);
     }
   }
 
@@ -62,7 +79,7 @@ export class StorageService {
       return true;
     }
     catch (error) {
-      console.log("Appwrite service :: deletePost :: error", error);
+      console.log("Appwrite service :: deletePost :: error ::", error);
       return false;
     }
   }
@@ -76,7 +93,7 @@ export class StorageService {
       );
     }
     catch (error) {
-      console.log("Appwrite service :: deletePost :: error", error);
+      console.log("Appwrite service :: deletePost :: error ::", error);
       return false;
     }
   }
@@ -90,7 +107,7 @@ export class StorageService {
       );
     }
     catch (error) {
-      console.log("Appwrite service :: deletePost :: error", error);
+      console.log("Appwrite service :: deletePost :: error ::", error);
       return false;
     }
   }
@@ -106,7 +123,7 @@ export class StorageService {
       );
     }
     catch (error) {
-      console.log("Appwrite service :: createFile :: error", error);
+      console.log("Appwrite service :: createFile :: error ::", error);
       return false;
     }
   }
@@ -120,7 +137,7 @@ export class StorageService {
       return true;
     }
     catch (error) {
-      console.log("Appwrite service :: createFile :: error", error);
+      console.log("Appwrite service :: createFile :: error ::", error);
       return false;
     }
   }
@@ -133,7 +150,7 @@ export class StorageService {
       );
     }
     catch (error) {
-      console.log("Appwrite service :: getFliePreview :: error", error);
+      console.log("Appwrite service :: getFliePreview :: error ::", error);
       return false;
     }
   }

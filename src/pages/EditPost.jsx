@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, PostForm } from '../components'
 import { useNavigate, useParams } from 'react-router-dom'
 import storageService from '../appwrite/storage'
@@ -20,7 +20,7 @@ function EditPost() {
   }, [])
 
   return post ? (
-    <div className="py-8">
+    <div className="py-8 min-h-screen">
       <Container>
         <PostForm post={post} />
       </Container>

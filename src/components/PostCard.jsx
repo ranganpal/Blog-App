@@ -2,10 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import storageService from '../appwrite/storage'
 
-function PostCard({ $id, title, featuredImage }) {
+function PostCard({ $id, title, featuredImage, authorName }) {
   return (
-    <Link to={`/post/${$id}`}>
-      <div className="w-full bg-gray-100 rounded-xl p-4">
+    <Link to={`/post/${$id}`} >
+      <div className="w-full h-full bg-gray-100 rounded-xl p-4 ">
 
         <div className="w-full justify-center mb-4">
           <img
@@ -15,9 +15,13 @@ function PostCard({ $id, title, featuredImage }) {
           />
         </div>
 
-        <h2 className="text-xl font-bold">
-          {title}
-        </h2>
+        <div className="text-lg font-bold">
+          <h2>{title}</h2>
+          <h2>
+            <span className="font-normal">posted by </span>
+            <span className="font-semibold">{authorName}</span>
+          </h2>
+        </div>
 
       </div>
     </Link>
