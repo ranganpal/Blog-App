@@ -21,7 +21,12 @@ function Protected({ children, authentication = true }) {
   }, [navigate, authStatus, authentication])
 
   return loading ? (
-    <h1>Loading...</h1>
+    <div className="min-h-screen bg-gray-400">
+      <div className="flex flex-col items-center justify-center h-screen">
+        <div className="w-16 h-16 border-t-4 border-b-4 border-gray-700 rounded-full animate-spin mb-2"></div>
+        <p className="text-gray-700 text-xl font-medium">Loading...</p>
+      </div>
+    </div>
   ) : (
     <>{children}</>
   )

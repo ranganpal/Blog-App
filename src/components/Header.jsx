@@ -1,12 +1,11 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { Logo, LogoutBtn } from './index'
+import { Link, NavLink } from 'react-router-dom'
+import { Logo } from './index'
 
 
 function Header() {
   const authStatus = useSelector(state => state.auth.authStatus)
-  const navigate = useNavigate()
 
   const navItems = [
     {
@@ -15,12 +14,12 @@ function Header() {
       active: true
     },
     {
-      name: "Login",
+      name: "LogIn",
       url: "/login",
       active: !authStatus,
     },
     {
-      name: "Signup",
+      name: "SignUp",
       url: "/signup",
       active: !authStatus,
     },
@@ -61,7 +60,7 @@ function Header() {
                   <NavLink
                     to={item.url}
                     className={({ isActive }) => (
-                      `${isActive ? "underline underline-offset-2 font-medium" : null}`
+                      `${isActive && "underline underline-offset-2 font-medium"}`
                     )}
                   >
                     {item.name}

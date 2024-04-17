@@ -69,12 +69,7 @@ function Login() {
               label="Email: "
               placeholder="Enter your email"
               {...register("email", {
-                required: true,
-                validate: {
-                  matchPatern: (value) => (
-                    /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || "Email address must be a valid address"
-                  )
-                }
+                required: true
               })}
             />
 
@@ -83,12 +78,7 @@ function Login() {
               label="Password: "
               placeholder="Enter your password"
               {...register("password", {
-                required: true,
-                validate: {
-                  matchPattern: (value) => (
-                    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>\/?]).{8,}$/.test(value) || "Password must meet complexity requirements"
-                  )
-                }
+                required: true
               })}
             />
 
@@ -96,8 +86,9 @@ function Login() {
               <Button
                 type="submit"
                 className="w-full"
-                children="Sign in"
-              />
+              >
+                Sign In
+              </Button>
             </div>
 
           </div>

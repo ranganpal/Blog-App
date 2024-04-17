@@ -10,10 +10,6 @@ const Input = forwardRef(function ({
   const id = useId()
   const [showPassword, setShowPassword] = useState(false)
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
   return type !== "password" ? (
     <div>
 
@@ -62,9 +58,13 @@ const Input = forwardRef(function ({
           ref={ref}
           {...props}
         />
+
         <button
-          onClick={togglePasswordVisibility}
+          type="button"
           className="focus:outline-none px-3 py-2"
+          onClick={() => {
+            setShowPassword(!showPassword)
+          }}
         >
           {showPassword ? (
             <svg

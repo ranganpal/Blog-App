@@ -128,12 +128,7 @@ function Signup() {
                 label="Password: "
                 placeholder="Enter your password"
                 {...register("password", {
-                  required: true,
-                  validate: {
-                    matchPattern: (value) => (
-                      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>\/?]).{8,}$/.test(value) || "Password must meet complexity requirements"
-                    )
-                  }
+                  required: true
                 })}
               />
             ) : (
@@ -143,12 +138,8 @@ function Signup() {
                   label="Password: "
                   placeholder="Enter your old password"
                   {...register("oldPassword", {
-                    required: true,
-                    validate: {
-                      matchPattern: (value) => (
-                        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>\/?]).{8,}$/.test(value) || "Password must meet complexity requirements"
-                      )
-                    }
+                    required: true
+                    // }
                   })}
                 />
                 <Input
@@ -156,12 +147,7 @@ function Signup() {
                   label="Password: "
                   placeholder="Enter your new password"
                   {...register("newPassword", {
-                    required: true,
-                    validate: {
-                      matchPattern: (value) => (
-                        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>\/?]).{8,}$/.test(value) || "Password must meet complexity requirements"
-                      )
-                    }
+                    required: true
                   })}
                 />
               </>
@@ -184,7 +170,6 @@ function Signup() {
                   onClick={() => {
                     authService.logout().then(() => {
                       dispatch(authLogout())
-                      navigate("/login")
                     })
                   }}
                 >

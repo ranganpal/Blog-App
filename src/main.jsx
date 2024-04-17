@@ -53,7 +53,6 @@ const router = createBrowserRouter([
         path: "/my-posts",
         element: (
           <Protected authentication={true}>
-            {" "}
             <MyPosts />
           </Protected>
         )
@@ -62,7 +61,6 @@ const router = createBrowserRouter([
         path: "/add-post",
         element: (
           <Protected authentication={true}>
-            {" "}
             <AddPost />
           </Protected>
         )
@@ -71,7 +69,6 @@ const router = createBrowserRouter([
         path: "/edit-post/:slug",
         element: (
           <Protected authentication={true}>
-            {" "}
             <EditPost />
           </Protected>
         )
@@ -80,7 +77,6 @@ const router = createBrowserRouter([
         path: "/account",
         element: (
           <Protected authentication={true}>
-            {" "}
             <Account />
           </Protected>
         )
