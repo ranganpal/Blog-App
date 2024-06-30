@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
-import { Logo } from './index'
+import { Logo, Container } from './index'
 
 
 function Header() {
@@ -41,37 +41,39 @@ function Header() {
   ]
 
   return (
-    <header className="px-5 py-3 shadow bg-gray-500">
-      <nav className="flex">
+    <header className="py-3 shadow bg-gray-500">
+      <Container>
+        <nav className="flex">
 
-        <div className="mr-4">
-          <Link to="/">
-            <Logo width="50px" />
-          </Link>
-        </div>
+          <div className="mr-4">
+            <Link to="/">
+              <Logo width="50px" />
+            </Link>
+          </div>
 
-        <ul className="flex ml-auto text-lg">
-          {navItems.map((item) => (
-            item.active ? (
-              <li key={item.name}>
-                <button
-                  className="inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full"
-                >
-                  <NavLink
-                    to={item.url}
-                    className={({ isActive }) => (
-                      `${isActive && "underline underline-offset-2 font-medium"}`
-                    )}
+          <ul className="flex ml-auto text-lg">
+            {navItems.map((item) => (
+              item.active ? (
+                <li key={item.name}>
+                  <button
+                    className="inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full"
                   >
-                    {item.name}
-                  </NavLink>
-                </button>
-              </li>
-            ) : (null)
-          ))}
-        </ul>
+                    <NavLink
+                      to={item.url}
+                      className={({ isActive }) => (
+                        `${isActive && "underline underline-offset-2 font-medium"}`
+                      )}
+                    >
+                      {item.name}
+                    </NavLink>
+                  </button>
+                </li>
+              ) : (null)
+            ))}
+          </ul>
 
-      </nav>
+        </nav>
+      </Container>
     </header >
   )
 }

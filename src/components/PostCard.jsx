@@ -7,10 +7,11 @@ function PostCard({ $id, title, featuredImage, authorName }) {
     <Link to={`/post/${$id}`} >
       <div className="w-full h-full bg-gray-100 rounded-xl p-4 ">
 
-        <div className="w-full justify-center mb-4">
+        <div className="w-full text-center mb-4">
           <img
             src={storageService.getFliePreview(featuredImage)}
             alt={title}
+            style={{ "maxHeight": "180px", "width": "100%" }}
             className="rounded-xl"
           />
         </div>

@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { Outlet } from "react-router-dom"
-import { authLogin, authLogout } from "./store/authSlice.js"
 import { Header, Footer } from "./components"
+import { authLogin, authLogout } from "./store/authSlice.js"
+import { setPosts, removePosts } from "./store/postSlice.js"
 import authService from "./appwrite/auth.js"
+import storageService from './appwrite/storage.js'
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -12,12 +14,22 @@ function App() {
   useEffect(() => {
     authService.getCurrentUser()
       .then((userData) => {
-        if (userData) dispatch(authLogin(userData))
-        else dispatch(authLogout())
+        dispatch(userData ? authLogin(userData) : authLogout())
+        storageService.getPosts().then((postList) => {
+          if (postList) {
+            const allPosts = postList.documents
+            const myPosts = allPosts.filter((post) => (
+              userData.$id == post.authorId
+            ))
+            dispatch(setPosts({ allPosts, myPosts }))
+          }
+          else {
+            dispatch(removePosts())
+          }
+        })
       })
       .finally(() => setLoading(false))
   }, [])
-
 
   return loading ? (
     <div className="min-h-screen bg-gray-400">

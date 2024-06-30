@@ -4,8 +4,9 @@ import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { Input, Button, Logo } from './index'
 import { authLogin } from '../store/authSlice'
+import { setPosts } from '../store/postSlice'
 import authService from '../appwrite/auth'
-
+import storageService from '../appwrite/storage'
 
 function Login() {
   const { register, handleSubmit } = useForm()
@@ -19,10 +20,19 @@ function Login() {
     try {
       const session = await authService.login(data)
       if (session) {
-
         const userData = await authService.getCurrentUser()
-        if (userData) dispatch(authLogin(userData))
-        navigate("/")
+        if (userData) {
+          dispatch(authLogin(userData))
+          const postList = await storageService.getPosts()
+          if (postList) {
+            const allPosts = postList.documents
+            const myPosts = allPosts.filter((post) => (
+              userData.$id == post.authorId
+            ))
+            dispatch(setPosts({ allPosts, myPosts }))
+          }
+          navigate("/")
+        }
       }
     }
     catch (error) {

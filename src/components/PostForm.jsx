@@ -31,27 +31,7 @@ function PostForm({ post }) {
   }, []);
 
   const submit = async (data) => {
-    if (post) {
-      // Update Post
-      const file = data.image[0] ? await storageService.createFile(data.image[0]) : null
-
-      if (file) {
-        await storageService.deleteFile(post.featuredImage)
-      }
-
-      const updatedPost = storageService.updatePost({
-        ...data,
-        slug: post.$id,
-        authorId: userData.$id,
-        featuredImage: file ? file.$id : post.featuredImage
-      })
-
-      if (updatedPost) {
-        navigate(`/post/${updatedPost.$id}`)
-      }
-
-    }
-    else {
+    if (!post) {
       // Create Post
       const file = data.image[0] ? await storageService.createFile(data.image[0]) : null
 
@@ -67,16 +47,35 @@ function PostForm({ post }) {
         }
       }
     }
+    else {
+      // Update Post
+      const file = data.image[0] ? await storageService.createFile(data.image[0]) : null
+
+      if (file) {
+        await storageService.deleteFile(post.featuredImage)
+      }
+
+      const updatedPost = await storageService.updatePost({
+        ...data,
+        slug: post.$id,
+        authorId: userData.$id,
+        featuredImage: file ? file.$id : post.featuredImage
+      })
+
+      if (updatedPost) {
+        navigate(`/post/${updatedPost.$id}`)
+      }
+    }
   }
 
   const handleImageChange = (event) => {
-    const file = event.target.files[0];
+    const file = event.target.files[0]
     if (file) {
-      const reader = new FileReader();
+      const reader = new FileReader()
       reader.onloadend = () => {
-        setPreviewImage(reader.result);
-      };
-      reader.readAsDataURL(file);
+        setPreviewImage(reader.result)
+      }
+      reader.readAsDataURL(file)
     }
   }
 

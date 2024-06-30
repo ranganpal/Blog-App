@@ -93,7 +93,7 @@ export class StorageService {
       );
     }
     catch (error) {
-      console.log("Appwrite service :: deletePost :: error ::", error);
+      console.log("Appwrite service :: getPost :: error ::", error);
       return false;
     }
   }
@@ -107,7 +107,7 @@ export class StorageService {
       );
     }
     catch (error) {
-      console.log("Appwrite service :: deletePost :: error ::", error);
+      console.log("Appwrite service :: getPosts :: error ::", error);
       return false;
     }
   }
@@ -137,7 +137,7 @@ export class StorageService {
       return true;
     }
     catch (error) {
-      console.log("Appwrite service :: createFile :: error ::", error);
+      console.log("Appwrite service :: deleteFile :: error ::", error);
       return false;
     }
   }

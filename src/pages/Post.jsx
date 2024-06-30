@@ -34,12 +34,14 @@ function Post() {
             src={storageService.getFliePreview(post.featuredImage)}
             alt={post.title}
             className="rounded-xl"
+            style={{maxWidth: "40vw"}}
           />
 
           {isAuthor && (
             <div className="absolute right-6 top-6">
 
               <Button
+                type="button"
                 bgColor="bg-green-500"
                 className="mr-3 hover:bg-green-600"
                 children="Edit"
@@ -49,6 +51,7 @@ function Post() {
               />
 
               <Button
+                type="button"
                 bgColor="bg-red-500"
                 className="hover:bg-red-600"
                 children="Delete"
@@ -77,7 +80,14 @@ function Post() {
 
       </Container>
     </div>
-  ) : null
+  ) : (
+    <div className="min-h-screen bg-gray-300">
+      <div className="flex flex-col items-center justify-center h-screen">
+        <div className="w-16 h-16 border-t-4 border-b-4 border-gray-700 rounded-full animate-spin mb-2"></div>
+        <p className="text-gray-700 text-xl font-medium">Loading Post...</p>
+      </div>
+    </div>
+  )
 }
 
 export default Post

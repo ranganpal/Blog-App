@@ -23,29 +23,19 @@ export class AuthService {
     }
     catch (error) {
       console.log("Appwrite service :: createAccount :: error ::", error);
+      throw error;
     }
   }
   
   async updateAccount({ email, oldPassword, newPassword, name }) {
     try {
-      await this.account.updateEmail(email, oldPassword)
-      await this.account.updatePassword(newPassword, oldPassword)
-      return await this.account.updateName(name)
+      await this.account.updateEmail(email, oldPassword);
+      await this.account.updatePassword(newPassword, oldPassword);
+      await this.account.updateName(name);
     }
     catch (error) {
       console.log("Appwrite service :: updateAccount :: error ::", error);
-    }
-  }
-  
-  async deleteAccount(userId) {
-    try {
-      console.log(userId);
-      await this.account.deleteIdentity(userId)
-      return true
-    }
-    catch (error) {
-      console.log("Appwrite service :: deleteAccount :: error ::", error);
-      return false
+      throw error;
     }
   }
 
@@ -55,6 +45,7 @@ export class AuthService {
     }
     catch (error) {
       console.log("Appwrite service :: login :: error ::", error);
+      throw error;
     }
   }
 
@@ -73,9 +64,8 @@ export class AuthService {
     }
     catch (error) {
       console.log("Appwrite service :: getCurrentUser :: error ::", error);
+      return null;
     }
-
-    return null;
   }
 }
 

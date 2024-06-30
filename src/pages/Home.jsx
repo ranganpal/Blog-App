@@ -1,19 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Container, PostCard } from '../components'
 import { useSelector } from 'react-redux'
-import storageService from '../appwrite/storage'
 
 function Home() {
-  const [posts, setPosts] = useState([])
+  const posts = useSelector(status => status.post.allPosts)
   const authStatus = useSelector(status => status.auth.authStatus)
-
-  useEffect(() => {
-    storageService.getPosts().then((posts) => {
-      if (posts) {
-        setPosts(posts.documents)
-      }
-    })
-  }, [])
 
   if (authStatus && posts.length > 0) {
     return (

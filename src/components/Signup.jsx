@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { Input, Button, Logo } from './index'
 import { authLogin, authLogout } from '../store/authSlice'
+import { removePosts } from '../store/postSlice'
 import authService from '../appwrite/auth'
 
 
@@ -22,20 +23,7 @@ function Signup() {
   const signup = async (formData) => {
     setError("")
 
-    if (currentUserData) {
-      // Update Account
-      try {
-        const updatedUserData = await authService.updateAccount(formData)
-        if (updatedUserData) {
-          dispatch(authLogin(updatedUserData))
-          navigate("/account")
-        }
-      }
-      catch (error) {
-        setError(error.message)
-      }
-    }
-    else {
+    if (!currentUserData) {
       // Create Account
       try {
         const session = await authService.createAccount(formData)
@@ -45,6 +33,18 @@ function Signup() {
           if (newUserData) dispatch(authLogin(newUserData))
           navigate("/")
         }
+      }
+      catch (error) {
+        setError(error.message)
+      }
+    }
+    else {
+      // Update Account
+      try {
+        await authService.updateAccount(formData)
+        await authService.logout()
+        dispatch(authLogout())
+        navigate("/login")
       }
       catch (error) {
         setError(error.message)
@@ -170,6 +170,7 @@ function Signup() {
                   onClick={() => {
                     authService.logout().then(() => {
                       dispatch(authLogout())
+                      dispatch(removePosts())
                     })
                   }}
                 >
