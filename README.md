@@ -2,6 +2,9 @@
 
 A modern blogging platform built with **React**, **Redux Toolkit**, **Vite**, and **Appwrite**. This project allows users to sign up, log in, create, edit, and manage blog posts with a clean and responsive UI.
 
+🔗 **Live Demo:** [https://appwrite-blog-app-iota.vercel.app](https://appwrite-blog-app-iota.vercel.app)
+
+
 ---
 
 ## 🚀 Features
