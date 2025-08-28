@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -80,7 +80,7 @@ function PostForm({ post }) {
   }
 
   useEffect(() => {
-    setPreviewImage(storageService.getFliePreview(post?.featuredImage || ""))
+    setPreviewImage(storageService.getFileView(post?.featuredImage || "").href)
   }, [post])
 
   useEffect(() => {

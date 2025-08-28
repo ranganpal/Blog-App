@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import parse from 'html-react-parser'
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -31,7 +31,7 @@ function Post() {
         <div className="w-full flex justify-center mb-4 relative border rounded-xl p-4 bg-gray-400">
 
           <img
-            src={storageService.getFliePreview(post.featuredImage)}
+            src={storageService.getFileView(post.featuredImage).href}
             alt={post.title}
             className="rounded-xl"
             style={{maxWidth: "40vw"}}

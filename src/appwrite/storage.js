@@ -142,15 +142,15 @@ export class StorageService {
     }
   }
 
-  getFliePreview(fileId) {
+  getFileView(fileId) {
     try {
-      return this.storage.getFilePreview(
+      return this.storage.getFileView(
         conf.appwriteBucketId,
         fileId
       );
     }
     catch (error) {
-      console.log("Appwrite service :: getFliePreview :: error ::", error);
+      console.log("Appwrite service :: getFilePreview :: error ::", error);
       return false;
     }
   }
